@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Details & Tracking | ShopSphere</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    @media print {
+      .site-header, .top-bar, .mobile-bottom-nav, .btn, .site-footer {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+    @media (max-width: 850px) {
+      .order-detail-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Shop<span>Sphere</span></span>
+      </a>
+
+      <div class="header-actions">
+        <a href="orders.html" class="nav-action-btn"><i class="fas fa-arrow-left"></i><span class="btn-text-label">All Orders</span></a>
+        <div class="auth-nav-slot"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    <!-- Breadcrumb -->
+    <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+      <a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size: 0.65rem; margin: 0 6px;"></i>
+      <a href="orders.html">Orders</a> <i class="fas fa-chevron-right" style="font-size: 0.65rem; margin: 0 6px;"></i>
+      <span style="color: var(--text-main); font-weight: 600;">Order Details</span>
+    </div>
+
+    <!-- Order Details View Container -->
+    <div id="order-details-container">
+      <div class="skeleton" style="height: 450px; border-radius: var(--radius-xl);"></div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/orders.js"></script>
+</body>
+</html>

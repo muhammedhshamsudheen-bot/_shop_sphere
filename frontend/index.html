@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSphere | Modern Online Shopping Experience</title>
+  <meta name="description" content="ShopSphere is a premier full-stack online shopping platform featuring top electronics, fashion, footwear, beauty and home essentials." />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div>
+        <i class="fas fa-truck-fast"></i> Free express shipping on orders over ₹999 across India!
+      </div>
+      <div class="top-bar-links">
+        <a href="shop.html"><i class="fas fa-bolt"></i> Daily Deals</a>
+        <a href="orders.html"><i class="fas fa-box"></i> Track Order</a>
+        <a href="admin.html"><i class="fas fa-shield-alt"></i> Admin Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a href="index.html" class="brand-logo">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Shop<span>Sphere</span></span>
+      </a>
+
+      <!-- Search Bar with Live Suggestions -->
+      <div class="header-search">
+        <div class="search-input-wrapper">
+          <input type="text" class="global-search-input" placeholder="Search for headphones, shoes, shirts, electronics..." />
+          <button class="search-btn" title="Search"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="search-suggestions-dropdown"></div>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <a href="wishlist.html" class="nav-action-btn" title="Wishlist">
+          <i class="far fa-heart"></i>
+          <span class="btn-text-label">Wishlist</span>
+        </a>
+
+        <a href="cart.html" class="nav-action-btn" title="Shopping Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="btn-text-label">Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- Dynamic User Auth Slot -->
+        <div class="auth-nav-slot">
+          <a href="login.html" class="btn btn-primary btn-sm">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="btn-text-label">Login</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Bar Links -->
+    <nav class="main-nav-bar">
+      <div class="container">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="shop.html"><i class="fas fa-store"></i> All Products</a></li>
+          <li><a href="shop.html?category=electronics">Electronics</a></li>
+          <li><a href="shop.html?category=fashion">Fashion</a></li>
+          <li><a href="shop.html?category=footwear">Footwear</a></li>
+          <li><a href="shop.html?category=home-and-kitchen">Home & Kitchen</a></li>
+          <li><a href="shop.html?category=beauty">Beauty</a></li>
+          <li><a href="shop.html?category=accessories">Accessories</a></li>
+          <li><a href="shop.html?featured=true"><span class="tag-deal">DEALS</span> Hot Offers</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Homepage Content -->
+  <main class="container">
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-sparkles"></i> FESTIVE SALE 2026 IS LIVE
+        </div>
+        <h1 class="hero-title">
+          Elevate Your Lifestyle With <span>Next-Gen Shopping</span>
+        </h1>
+        <p class="hero-subtitle">
+          Discover handpicked premium electronics, runway fashion, and home essentials. Fast delivery and secure Indian payments via Razorpay.
+        </p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-light btn-lg">
+            Shop Catalog <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="shop.html?featured=true" class="btn btn-secondary btn-lg" style="background: rgba(255, 255, 255, 0.9);">
+            <i class="fas fa-fire" style="color: #ef4444;"></i> View Deals
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80" alt="Premium Wireless Headphones" />
+      </div>
+    </section>
+
+    <!-- Product Categories Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2>Browse By Category</h2>
+          <p>Explore curated collections tailored to your lifestyle</p>
+        </div>
+        <a href="shop.html" class="section-header-link">View All Categories <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="categories-grid" id="homepage-categories-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2>Featured Products</h2>
+          <p>Top picks hand-selected by our shopping specialists</p>
+        </div>
+        <a href="shop.html?featured=true" class="section-header-link">See All Featured <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="products-grid" id="homepage-featured-grid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </section>
+
+    <!-- Promotional Discount Banner -->
+    <section style="margin: 3.5rem 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: var(--radius-xl); padding: 3rem; color: #ffffff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+      <div style="max-width: 600px;">
+        <span class="badge badge-warning" style="margin-bottom: 0.75rem; font-size: 0.85rem;">SPECIAL PROMOTION</span>
+        <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.2;">
+          Use Code <span style="color: #38bdf8;">WELCOME10</span> For 10% Off
+        </h2>
+        <p style="color: #94a3b8; font-size: 1rem;">
+          Get up to ₹500 off on your first order. Combine with free shipping on cart values over ₹999.
+        </p>
+      </div>
+      <div>
+        <a href="shop.html" class="btn btn-primary btn-lg">Claim Offer Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2>Best Sellers</h2>
+          <p>Customer favorites flying off the shelves</p>
+        </div>
+        <a href="shop.html?bestSeller=true" class="section-header-link">View All Best Sellers <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="products-grid" id="homepage-bestsellers-grid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </section>
+
+    <!-- Trending Products Section -->
+    <section>
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2>Trending Right Now</h2>
+          <p>Popular items dominating this season's trends</p>
+        </div>
+        <a href="shop.html?trending=true" class="section-header-link">Explore Trending <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="products-grid" id="homepage-trending-grid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </section>
+
+    <!-- Trust Features / Value Props -->
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
+          <div class="feature-text">
+            <h4>Free Shipping</h4>
+            <p>Free standard delivery on orders over ₹999 across all pin codes</p>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="feature-text">
+            <h4>Razorpay Secure</h4>
+            <p>100% encrypted checkout supporting Cards, UPI & NetBanking</p>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-rotate-left"></i></div>
+          <div class="feature-text">
+            <h4>7 Days Returns</h4>
+            <p>Hassle-free replacement or refund on eligible purchases</p>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <div class="feature-text">
+            <h4>24/7 Dedicated Support</h4>
+            <p>Real-time customer assistance via email and order tracking</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews Showcase -->
+    <section style="margin: 4rem 0;">
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2>What Our Customers Say</h2>
+          <p>Real feedback from verified purchasers</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" id="homepage-reviews-grid">
+        <div style="background: #ffffff; border-radius: var(--radius-lg); padding: 1.75rem; border: 1px solid var(--surface-border); box-shadow: var(--shadow-xs);">
+          <div style="color: #f59e0b; margin-bottom: 0.75rem;">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+            "The Sony WH-1000XM5 headphones arrived within 2 days in mint condition. The noise cancellation is breathtaking, and checkout through Razorpay was instantaneous!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700;">M</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.9rem;">Muhammed Shamsu</div>
+              <div style="font-size: 0.75rem; color: var(--accent);"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border-radius: var(--radius-lg); padding: 1.75rem; border: 1px solid var(--surface-border); box-shadow: var(--shadow-xs);">
+          <div style="color: #f59e0b; margin-bottom: 0.75rem;">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+            "Bought the French flax linen shirt. Premium fabric feel, great stitching and fits true to size. Super pleased with the GST invoice breakdown too."
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #ecfdf5; color: #059669; display: flex; align-items: center; justify-content: center; font-weight: 700;">A</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.9rem;">Ananya Sharma</div>
+              <div style="font-size: 0.75rem; color: var(--accent);"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border-radius: var(--radius-lg); padding: 1.75rem; border: 1px solid var(--surface-border); box-shadow: var(--shadow-xs);">
+          <div style="color: #f59e0b; margin-bottom: 0.75rem;">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+          </div>
+          <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+            "De'Longhi Dedica machine makes fantastic rich espresso. Order tracking timeline was updated accurately from processing to out for delivery."
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #fffbeb; color: #d97706; display: flex; align-items: center; justify-content: center; font-weight: 700;">R</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.9rem;">Rahul Verma</div>
+              <div style="font-size: 0.75rem; color: var(--accent);"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="brand-logo" style="color: #ffffff;">
+          <i class="fas fa-bag-shopping" style="color: #818cf8;"></i>
+          <span>Shop<span style="color: #818cf8;">Sphere</span></span>
+        </a>
+        <p>
+          Experience next-generation e-commerce with curated collections, authoritative server-side pricing, transparent GST calculation, and Razorpay integration.
+        </p>
+        <div style="margin-top: 1.25rem; display: flex; gap: 12px; font-size: 1.25rem;">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="shop.html">Browse All Products</a></li>
+          <li><a href="shop.html?category=electronics">Electronics & Gadgets</a></li>
+          <li><a href="shop.html?category=fashion">Fashion & Apparel</a></li>
+          <li><a href="shop.html?category=footwear">Footwear & Sneakers</a></li>
+          <li><a href="orders.html">Track Order Shipment</a></li>
+          <li><a href="wishlist.html">Saved Wishlist</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="#">Shipping & Delivery Policy</a></li>
+          <li><a href="#">Return & Refund Guidelines</a></li>
+          <li><a href="#">GST Tax Invoicing Terms</a></li>
+          <li><a href="#">Privacy & Security Policy</a></li>
+          <li><a href="admin.html">Admin Supervisor Login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stay In The Loop</h4>
+        <p style="font-size: 0.875rem; margin-bottom: 0.75rem;">
+          Subscribe to receive secret flash coupon codes and seasonal product drops.
+        </p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed to ShopSphere updates!', 'success');">
+          <input type="email" placeholder="Enter your email" required />
+          <button type="submit" class="btn btn-primary btn-sm">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>
+        &copy; 2026 ShopSphere E-Commerce Platform. All rights reserved. Built with professional full-stack standards.
+      </div>
+      <div class="payment-methods-icons">
+        <i class="fab fa-cc-visa" title="Visa"></i>
+        <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+        <i class="fas fa-qrcode" title="UPI (Google Pay, PhonePe, Paytm)"></i>
+        <i class="fas fa-building-columns" title="NetBanking"></i>
+        <i class="fas fa-shield-alt" title="Razorpay Verified"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item active">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item">
+      <i class="fas fa-store"></i>
+      <span>Shop</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item">
+      <i class="far fa-heart"></i>
+      <span>Wishlist</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Cart</span>
+      <span class="mobile-nav-badge" style="display: none;">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i class="far fa-user"></i>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Load Categories
+      try {
+        const catRes = await api.get('/categories');
+        const catGrid = document.getElementById('homepage-categories-grid');
+        if (catGrid && catRes.categories) {
+          catGrid.innerHTML = catRes.categories.map(c => `
+            <a href="shop.html?category=${c.slug}" class="category-card">
+              <div class="category-icon-wrap"><i class="fas ${c.icon || 'fa-box'}"></i></div>
+              <h4>${c.name}</h4>
+              <span>${c.itemCount || 0} Products</span>
+            </a>
+          `).join('');
+        }
+      } catch (e) {}
+
+      // 2. Load Curated Collections (Featured, Bestsellers, Trending)
+      try {
+        const colRes = await api.get('/products/curated/collections');
+        const featGrid = document.getElementById('homepage-featured-grid');
+        const bestGrid = document.getElementById('homepage-bestsellers-grid');
+        const trendGrid = document.getElementById('homepage-trending-grid');
+
+        if (featGrid && colRes.collections.featured) {
+          featGrid.innerHTML = colRes.collections.featured.slice(0, 4).map(renderProductCard).join('');
+        }
+        if (bestGrid && colRes.collections.bestSellers) {
+          bestGrid.innerHTML = colRes.collections.bestSellers.slice(0, 4).map(renderProductCard).join('');
+        }
+        if (trendGrid && colRes.collections.trending) {
+          trendGrid.innerHTML = colRes.collections.trending.slice(0, 4).map(renderProductCard).join('');
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

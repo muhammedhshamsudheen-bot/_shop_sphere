@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart | ShopSphere</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div><i class="fas fa-truck-fast"></i> Free express shipping on orders over ₹999 across India!</div>
+      <div class="top-bar-links">
+        <a href="shop.html">Browse Shop</a>
+        <a href="orders.html">My Orders</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Shop<span>Sphere</span></span>
+      </a>
+
+      <div class="header-search">
+        <div class="search-input-wrapper">
+          <input type="text" class="global-search-input" placeholder="Search for items, brands, categories..." />
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="search-suggestions-dropdown"></div>
+      </div>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="nav-action-btn"><i class="far fa-heart"></i><span class="btn-text-label">Wishlist</span></a>
+        <a href="cart.html" class="nav-action-btn" style="color: var(--primary);">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="btn-text-label">Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+        <div class="auth-nav-slot">
+          <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <!-- Breadcrumb -->
+    <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+      <a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size: 0.65rem; margin: 0 6px;"></i>
+      <a href="shop.html">Shop</a> <i class="fas fa-chevron-right" style="font-size: 0.65rem; margin: 0 6px;"></i>
+      <span style="color: var(--text-main); font-weight: 600;">Shopping Cart</span>
+    </div>
+
+    <!-- Empty Cart State -->
+    <div id="empty-cart-state" style="display: none; text-align: center; padding: 5rem 1rem; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--surface-border); box-shadow: var(--shadow-sm);">
+      <div style="width: 90px; height: 90px; border-radius: 50%; background: var(--surface-alt); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: #94a3b8; font-size: 2.5rem;">
+        <i class="fas fa-cart-shopping"></i>
+      </div>
+      <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem;">Your Cart is Empty</h2>
+      <p style="color: var(--text-muted); font-size: 1rem; max-width: 420px; margin: 0 auto 2rem;">
+        Looks like you haven't added anything to your cart yet. Explore our featured categories and deals!
+      </p>
+      <a href="shop.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-shopping-bag"></i> Discover Products
+      </a>
+    </div>
+
+    <!-- Cart Layout Container -->
+    <div id="cart-content-wrapper" class="cart-layout" style="display: grid;">
+      <!-- Left Cart Items Column -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <h2 style="font-size: 1.6rem; font-weight: 800;">Shopping Cart</h2>
+          <button class="btn btn-secondary btn-sm" onclick="clearEntireCart()" style="color: var(--danger);">
+            <i class="far fa-trash-alt"></i> Clear Cart
+          </button>
+        </div>
+
+        <!-- Free shipping meter -->
+        <div id="free-shipping-meter"></div>
+
+        <!-- Cart Items List -->
+        <div style="background: #ffffff; border: 1px solid var(--surface-border); border-radius: var(--radius-xl); padding: 0 1.5rem; box-shadow: var(--shadow-xs);">
+          <div id="cart-items-body"></div>
+        </div>
+
+        <!-- Continue Shopping Bar -->
+        <div style="margin-top: 1.5rem;">
+          <a href="shop.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Summary Column -->
+      <div id="cart-summary-box"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 ShopSphere. All rights reserved.</div>
+      <div class="payment-methods-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fas fa-qrcode"></i>
+        <i class="fas fa-shield-alt"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="shop.html" class="mobile-nav-item"><i class="fas fa-store"></i><span>Shop</span></a>
+    <a href="wishlist.html" class="mobile-nav-item"><i class="far fa-heart"></i><span>Wishlist</span></a>
+    <a href="cart.html" class="mobile-nav-item active"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="mobile-nav-badge" style="display: none;">0</span></a>
+    <a href="profile.html" class="mobile-nav-item"><i class="far fa-user"></i><span>Account</span></a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

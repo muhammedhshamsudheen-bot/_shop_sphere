@@ -1,0 +1,227 @@
+/* ==========================================================================
+   ShopSphere Responsive Styles & Mobile Navigation
+   ========================================================================== */
+
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--surface-border);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  height: 62px;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  gap: 3px;
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.mobile-nav-item i {
+  font-size: 1.25rem;
+}
+
+.mobile-nav-item.active, .mobile-nav-item:hover {
+  color: var(--primary);
+}
+
+.mobile-nav-badge {
+  position: absolute;
+  top: 6px;
+  right: 24%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  body {
+    padding-bottom: 66px;
+  }
+
+  .main-nav-bar {
+    display: none;
+  }
+
+  .top-bar {
+    display: none;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  .header-actions .btn-text-label {
+    display: none;
+  }
+
+  .hero-banner {
+    padding: 2.25rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .features-section {
+    padding: 1.5rem;
+  }
+}
+
+/* Catalog Layout on Tablet / Mobile */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 320px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 10001;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-xl);
+    transition: left 0.3s ease;
+  }
+
+  .catalog-sidebar.active {
+    left: 0;
+  }
+
+  .mobile-filter-btn {
+    display: inline-flex !important;
+  }
+}
+
+.mobile-filter-btn {
+  display: none;
+}
+
+/* Cart & Checkout Responsive */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 992px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stepper Responsive */
+.checkout-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  text-align: center;
+}
+
+.step-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 2px solid var(--surface-border);
+  color: var(--text-muted);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transition: var(--transition-fast);
+}
+
+.step-item.active .step-bubble {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.step-item.completed .step-bubble {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.step-item.active .step-label {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+@media (max-width: 576px) {
+  .step-label {
+    display: none;
+  }
+  .step-bubble {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "online-shopping-cart",
+  "version": "1.0.0",
+  "description": "Full-stack modern e-commerce online shopping cart web application",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "seed": "node backend/utils/seed.js",
+    "test": "node backend/tests/test_api.js"
+  },
+  "keywords": ["ecommerce", "shopping-cart", "express", "mongodb", "razorpay"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1",
+    "morgan": "^1.10.0",
+    "razorpay": "^2.9.4"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^9.4.0"
+  }
+}

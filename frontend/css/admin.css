@@ -1,0 +1,244 @@
+/* ==========================================================================
+   ShopSphere Admin Dashboard Stylesheet
+   ========================================================================== */
+
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.admin-sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-sidebar-header h3 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.admin-nav {
+  padding: 1rem 0;
+  list-style: none;
+  flex: 1;
+}
+
+.admin-nav-item {
+  margin-bottom: 4px;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1.5rem;
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.925rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.admin-nav-link:hover, .admin-nav-link.active {
+  color: #ffffff;
+  background: #1e293b;
+  border-left: 4px solid var(--primary);
+}
+
+.admin-nav-link i {
+  font-size: 1.15rem;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.admin-topbar {
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--surface-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-topbar h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.admin-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1100px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpi-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-info h5 {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.kpi-info h3 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.kpi-icon.primary { background: var(--primary-light); color: var(--primary); }
+.kpi-icon.success { background: var(--accent-light); color: var(--accent); }
+.kpi-icon.warning { background: var(--warning-light); color: var(--warning); }
+.kpi-icon.danger { background: var(--danger-light); color: var(--danger); }
+
+/* Admin Data Table */
+.admin-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.admin-card-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--surface-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-card-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.admin-table-container {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #f8fafc;
+  padding: 12px 18px;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.admin-table td {
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--surface-border);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background: #f8fafc;
+}
+
+.table-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-product-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 1px solid var(--surface-border);
+}
+
+/* Order Status Tags */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.status-badge.confirmed { background: #dbeafe; color: #1d4ed8; }
+.status-badge.processing { background: #fef3c7; color: #b45309; }
+.status-badge.shipped { background: #e0e7ff; color: #4338ca; }
+.status-badge.delivered { background: #d1fae5; color: #047857; }
+.status-badge.cancelled { background: #fee2e2; color: #b91c1c; }

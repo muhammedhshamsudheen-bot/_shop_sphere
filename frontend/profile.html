@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile & Addresses | ShopSphere</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div><i class="fas fa-shield-alt"></i> Safe and secure account management</div>
+      <div class="top-bar-links">
+        <a href="shop.html">Shop Catalog</a>
+        <a href="orders.html">My Orders</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Shop<span>Sphere</span></span>
+      </a>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="nav-action-btn"><i class="far fa-heart"></i><span class="btn-text-label">Wishlist</span></a>
+        <a href="cart.html" class="nav-action-btn">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="btn-text-label">Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+        <div class="auth-nav-slot"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2rem;" class="cart-layout">
+      <!-- Profile Sidebar -->
+      <aside style="background: #ffffff; border: 1px solid var(--surface-border); border-radius: var(--radius-xl); padding: 2rem; height: fit-content; text-align: center; box-shadow: var(--shadow-sm);">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 1rem; font-weight: 800;">
+          <span id="profile-avatar-letter">U</span>
+        </div>
+        <h3 id="profile-display-name" style="font-size: 1.25rem; font-weight: 800;">Loading...</h3>
+        <p id="profile-display-email" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">loading@example.com</p>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; text-align: left; border-top: 1px solid var(--surface-border); padding-top: 1.25rem;">
+          <a href="orders.html" class="btn btn-secondary btn-sm" style="justify-content: flex-start;">
+            <i class="fas fa-box" style="width: 20px;"></i> My Orders
+          </a>
+          <a href="wishlist.html" class="btn btn-secondary btn-sm" style="justify-content: flex-start;">
+            <i class="fas fa-heart" style="width: 20px;"></i> Saved Wishlist
+          </a>
+          <button onclick="auth.logout()" class="btn btn-secondary btn-sm" style="justify-content: flex-start; color: var(--danger);">
+            <i class="fas fa-sign-out-alt" style="width: 20px;"></i> Sign Out
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Profile & Address Section -->
+      <div>
+        <!-- Profile Details Form -->
+        <div style="background: #ffffff; border: 1px solid var(--surface-border); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+          <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.25rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 0.75rem;">
+            Personal Information
+          </h3>
+
+          <form onsubmit="handleUpdateProfile(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="edit-profile-name" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mobile Phone</label>
+                <input type="tel" id="edit-profile-phone" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address (Registered)</label>
+              <input type="email" id="edit-profile-email" class="form-control" disabled style="background: var(--surface-alt);" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm">Save Profile Changes</button>
+          </form>
+        </div>
+
+        <!-- Saved Addresses -->
+        <div style="background: #ffffff; border: 1px solid var(--surface-border); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 800;">Saved Delivery Addresses</h3>
+            <button class="btn btn-outline-primary btn-sm" onclick="openProfileAddressModal()">
+              <i class="fas fa-plus"></i> Add Address
+            </button>
+          </div>
+
+          <div id="profile-addresses-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add/Edit Address Modal -->
+  <div id="profile-address-modal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Add New Address</h3>
+        <button class="modal-close-btn" onclick="closeProfileAddressModal()">&times;</button>
+      </div>
+      <form onsubmit="handleSaveAddress(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" id="p-addr-name" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">10-Digit Mobile Phone *</label>
+              <input type="tel" id="p-addr-phone" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Flat, House no., Building, Company *</label>
+            <input type="text" id="p-addr-street" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Area, Colony, Sector, Street</label>
+            <input type="text" id="p-addr-apt" class="form-control" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">City *</label>
+              <input type="text" id="p-addr-city" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">State *</label>
+              <input type="text" id="p-addr-state" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">PIN Code *</label>
+              <input type="text" id="p-addr-pin" class="form-control" required />
+            </div>
+            <div class="form-group" style="display: flex; align-items: flex-end; padding-bottom: 12px;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer;">
+                <input type="checkbox" id="p-addr-default" /> Make Default
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeProfileAddressModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Address</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="shop.html" class="mobile-nav-item"><i class="fas fa-store"></i><span>Shop</span></a>
+    <a href="wishlist.html" class="mobile-nav-item"><i class="far fa-heart"></i><span>Wishlist</span></a>
+    <a href="cart.html" class="mobile-nav-item"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="mobile-nav-badge" style="display: none;">0</span></a>
+    <a href="profile.html" class="mobile-nav-item active"><i class="far fa-user"></i><span>Account</span></a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    async function loadProfile() {
+      if (!auth.isLoggedIn()) {
+        window.location.href = 'login.html?redirect=profile.html';
+        return;
+      }
+
+      try {
+        const data = await api.get('/auth/me');
+        const u = data.user;
+
+        document.getElementById('profile-display-name').textContent = u.name;
+        document.getElementById('profile-display-email').textContent = u.email;
+        document.getElementById('profile-avatar-letter').textContent = u.name.charAt(0).toUpperCase();
+
+        document.getElementById('edit-profile-name').value = u.name;
+        document.getElementById('edit-profile-phone').value = u.phone || '';
+        document.getElementById('edit-profile-email').value = u.email;
+
+        renderAddresses(u.addresses || []);
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function renderAddresses(addresses) {
+      const grid = document.getElementById('profile-addresses-grid');
+      if (!grid) return;
+
+      if (addresses.length === 0) {
+        grid.innerHTML = '<p style="color: #64748b;">No saved addresses yet.</p>';
+        return;
+      }
+
+      grid.innerHTML = addresses.map(a => `
+        <div style="border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 1.25rem; background: var(--surface-alt); position: relative;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <strong>${a.fullName}</strong>
+            ${a.isDefault ? '<span class="badge badge-primary">Default</span>' : ''}
+          </div>
+          <div style="font-size: 0.85rem; color: #475569; line-height: 1.5; margin-bottom: 0.75rem;">
+            ${a.street}, ${a.apartment ? a.apartment + ', ' : ''}${a.city}, ${a.state} - <strong>${a.postalCode}</strong><br/>
+            Phone: ${a.phone}
+          </div>
+          <button onclick="deleteAddress('${a._id}')" class="btn btn-secondary btn-sm" style="color: var(--danger); font-size: 0.75rem;">
+            <i class="far fa-trash-alt"></i> Delete
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function handleUpdateProfile(e) {
+      e.preventDefault();
+      const name = document.getElementById('edit-profile-name').value;
+      const phone = document.getElementById('edit-profile-phone').value;
+
+      try {
+        await api.put('/auth/profile', { name, phone });
+        showToast('Profile updated successfully', 'success');
+        loadProfile();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function openProfileAddressModal() {
+      document.getElementById('profile-address-modal').classList.add('active');
+    }
+
+    function closeProfileAddressModal() {
+      document.getElementById('profile-address-modal').classList.remove('active');
+    }
+
+    async function handleSaveAddress(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('p-addr-name').value;
+      const phone = document.getElementById('p-addr-phone').value;
+      const street = document.getElementById('p-addr-street').value;
+      const apartment = document.getElementById('p-addr-apt').value;
+      const city = document.getElementById('p-addr-city').value;
+      const state = document.getElementById('p-addr-state').value;
+      const postalCode = document.getElementById('p-addr-pin').value;
+      const isDefault = document.getElementById('p-addr-default').checked;
+
+      try {
+        await api.post('/auth/addresses', { fullName, phone, street, apartment, city, state, postalCode, isDefault });
+        showToast('Address added', 'success');
+        closeProfileAddressModal();
+        loadProfile();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    async function deleteAddress(addressId) {
+      if (!confirm('Delete this address?')) return;
+      try {
+        await api.delete(`/auth/addresses/${addressId}`);
+        showToast('Address removed', 'info');
+        loadProfile();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProfile);
+  </script>
+</body>
+</html>

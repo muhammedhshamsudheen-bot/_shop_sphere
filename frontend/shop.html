@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Catalog | ShopSphere Online Store</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div>
+        <i class="fas fa-truck-fast"></i> Free express delivery on orders over ₹999 across India!
+      </div>
+      <div class="top-bar-links">
+        <a href="orders.html"><i class="fas fa-box"></i> Track Order</a>
+        <a href="admin.html"><i class="fas fa-shield-alt"></i> Admin Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Shop<span>Sphere</span></span>
+      </a>
+
+      <div class="header-search">
+        <div class="search-input-wrapper">
+          <input type="text" class="global-search-input" id="catalog-search-input" placeholder="Search products, brands, or categories..." />
+          <button class="search-btn" onclick="executeSearch()"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="search-suggestions-dropdown"></div>
+      </div>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="nav-action-btn">
+          <i class="far fa-heart"></i>
+          <span class="btn-text-label">Wishlist</span>
+        </a>
+
+        <a href="cart.html" class="nav-action-btn">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="btn-text-label">Cart</span>
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+
+        <div class="auth-nav-slot">
+          <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="main-nav-bar">
+      <div class="container">
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="shop.html" class="active"><i class="fas fa-store"></i> All Products</a></li>
+          <li><a href="shop.html?category=electronics">Electronics</a></li>
+          <li><a href="shop.html?category=fashion">Fashion</a></li>
+          <li><a href="shop.html?category=footwear">Footwear</a></li>
+          <li><a href="shop.html?category=home-and-kitchen">Home & Kitchen</a></li>
+          <li><a href="shop.html?category=beauty">Beauty</a></li>
+          <li><a href="shop.html?category=accessories">Accessories</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Breadcrumb & Mobile Filter Button -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div style="font-size: 0.875rem; color: var(--text-muted);">
+        <a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size: 0.65rem; margin: 0 6px;"></i> 
+        <strong style="color: var(--text-main);">Catalog</strong>
+      </div>
+
+      <button class="btn btn-secondary btn-sm mobile-filter-btn" onclick="toggleMobileSidebar()">
+        <i class="fas fa-sliders-h"></i> Filters
+      </button>
+    </div>
+
+    <!-- Catalog Main Layout -->
+    <div class="catalog-layout">
+      <!-- Left Sidebar Filters -->
+      <aside class="catalog-sidebar" id="catalog-sidebar-el">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 800;"><i class="fas fa-filter" style="color: var(--primary);"></i> Filters</h3>
+          <button class="btn btn-secondary btn-sm" onclick="clearAllFilters()" style="font-size: 0.78rem;">Clear All</button>
+        </div>
+
+        <!-- Category Filter -->
+        <div style="margin-bottom: 1.75rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 1.5rem;">
+          <label class="form-label" style="margin-bottom: 0.75rem;">Categories</label>
+          <div id="filter-categories-list" style="display: flex; flex-direction: column; gap: 8px;">
+            <!-- Dynamically Populated -->
+          </div>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div style="margin-bottom: 1.75rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 1.5rem;">
+          <label class="form-label">Price Range (₹)</label>
+          <div style="display: flex; gap: 8px; align-items: center; margin-top: 0.5rem;">
+            <input type="number" id="filter-min-price" placeholder="Min" class="form-control" style="padding: 6px 10px; font-size: 0.85rem;" />
+            <span style="color: var(--text-muted);">-</span>
+            <input type="number" id="filter-max-price" placeholder="Max" class="form-control" style="padding: 6px 10px; font-size: 0.85rem;" />
+            <button class="btn btn-primary btn-sm" onclick="applyPriceFilter()"><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- Rating Filter -->
+        <div style="margin-bottom: 1.75rem; border-bottom: 1px solid var(--surface-border); padding-bottom: 1.5rem;">
+          <label class="form-label" style="margin-bottom: 0.75rem;">Customer Rating</label>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.875rem;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="filter_rating" value="4" onchange="setRatingFilter(4)" />
+              <span style="color: #f59e0b;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span>
+              <span>4.0 & above</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="filter_rating" value="3" onchange="setRatingFilter(3)" />
+              <span style="color: #f59e0b;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span>
+              <span>3.0 & above</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Availability Filter -->
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 600;">
+            <input type="checkbox" id="filter-in-stock" onchange="toggleInStock(this.checked)" />
+            <span>In Stock Only</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- Right Products Content -->
+      <section>
+        <!-- Toolbar: Count and Sort Dropdown -->
+        <div style="background: #ffffff; border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div id="results-count" style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">
+            Loading products...
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="catalog-sort-select" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); white-space: nowrap;">Sort By:</label>
+            <select id="catalog-sort-select" class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.85rem;" onchange="handleSortChange(this.value)">
+              <option value="newest">Newest Arrivals</option>
+              <option value="popular">Popularity & Best Sellers</option>
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid of Products -->
+        <div class="products-grid" id="products-catalog-grid"></div>
+
+        <!-- Pagination Bar -->
+        <div id="catalog-pagination" style="display: flex; justify-content: center; gap: 8px; margin: 3rem 0;"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 ShopSphere. All rights reserved.</div>
+      <div class="payment-methods-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fas fa-qrcode"></i>
+        <i class="fas fa-shield-alt"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="shop.html" class="mobile-nav-item active"><i class="fas fa-store"></i><span>Shop</span></a>
+    <a href="wishlist.html" class="mobile-nav-item"><i class="far fa-heart"></i><span>Wishlist</span></a>
+    <a href="cart.html" class="mobile-nav-item"><i class="fas fa-shopping-cart"></i><span>Cart</span><span class="mobile-nav-badge" style="display: none;">0</span></a>
+    <a href="profile.html" class="mobile-nav-item"><i class="far fa-user"></i><span>Account</span></a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Parse URL Parameters (search, category, etc.)
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('search')) {
+        currentFilters.search = params.get('search');
+        const input = document.getElementById('catalog-search-input');
+        if (input) input.value = params.get('search');
+      }
+      if (params.get('category')) currentFilters.category = params.get('category');
+      if (params.get('featured')) currentFilters.featured = 'true';
+      if (params.get('trending')) currentFilters.trending = 'true';
+      if (params.get('bestSeller')) currentFilters.bestSeller = 'true';
+
+      // 2. Fetch Categories for filter list
+      try {
+        const catRes = await api.get('/categories');
+        const list = document.getElementById('filter-categories-list');
+        if (list && catRes.categories) {
+          list.innerHTML = `
+            <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem; cursor: pointer;">
+              <span><input type="radio" name="cat_filter" value="all" ${currentFilters.category === 'all' ? 'checked' : ''} onchange="setCategoryFilter('all')" /> All Categories</span>
+            </label>
+            ${catRes.categories.map(c => `
+              <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem; cursor: pointer;">
+                <span><input type="radio" name="cat_filter" value="${c.slug}" ${currentFilters.category === c.slug ? 'checked' : ''} onchange="setCategoryFilter('${c.slug}')" /> ${c.name}</span>
+                <span style="color: var(--text-muted); font-size: 0.75rem;">(${c.itemCount || 0})</span>
+              </label>
+            `).join('')}
+          `;
+        }
+      } catch (e) {}
+
+      loadCatalog(1);
+    });
+
+    function setCategoryFilter(slug) {
+      currentFilters.category = slug;
+      loadCatalog(1);
+    }
+
+    function handleSortChange(sortVal) {
+      currentFilters.sort = sortVal;
+      loadCatalog(1);
+    }
+
+    function toggleInStock(inStock) {
+      currentFilters.inStock = inStock;
+      loadCatalog(1);
+    }
+
+    function setRatingFilter(rating) {
+      currentFilters.rating = rating;
+      loadCatalog(1);
+    }
+
+    function applyPriceFilter() {
+      currentFilters.minPrice = document.getElementById('filter-min-price').value;
+      currentFilters.maxPrice = document.getElementById('filter-max-price').value;
+      loadCatalog(1);
+    }
+
+    function executeSearch() {
+      const input = document.getElementById('catalog-search-input');
+      currentFilters.search = input.value.trim();
+      loadCatalog(1);
+    }
+
+    function toggleMobileSidebar() {
+      const el = document.getElementById('catalog-sidebar-el');
+      if (el) el.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
